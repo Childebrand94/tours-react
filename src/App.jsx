@@ -1,6 +1,14 @@
-const url = 'https://course-api.com/react-tours-project';
+import Title from './components/Title'
+import TourList from './components/TourList'
 
 const App = () => {
-  return <h2>Tours Starter</h2>;
-};
-export default App;
+  return (
+    <main>
+      <section>
+        <Title />
+        <TourList />
+      </section>
+    </main>
+  )
+}
+export default App
