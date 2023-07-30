@@ -6,7 +6,7 @@ import LoadingScreen from './LoadingScreen'
 const TourList = () => {
   const url = 'https://course-api.com/react-tours-project'
 
-  const [data, setData] = useState([])
+  const [tours, setTours] = useState([])
   const [isEmptyTourList, setIsEmptyTourList] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -21,7 +21,7 @@ const TourList = () => {
         }
 
         const jsonResp = await response.json()
-        setData(jsonResp)
+        setTours(jsonResp)
         setIsLoading(false)
       } catch (error) {
         console.log(error)
@@ -31,7 +31,7 @@ const TourList = () => {
   }, [isEmptyTourList])
 
   const deleteTour = (dataId) => {
-    setData((prevData) => prevData.filter((item) => item.id !== dataId))
+    setTours((prevData) => prevData.filter((item) => item.id !== dataId))
   }
 
   const refreshClick = () => {
@@ -45,10 +45,10 @@ const TourList = () => {
         <LoadingScreen />
       ) : (
         <div className="tours">
-          {data.map(({ id, image, name, info, price }) => {
-            return <Tour key={id} image={image} name={name} info={info} price={price} onClick={() => deleteTour(id)} />
+          {tours.map((tour) => {
+            return <Tour key={tour.id} {...tour} onClick={() => deleteTour(tour.id)} />
           })}
-          {data.length === 0 && <RefreshButton onClick={refreshClick} />}
+          {tours.length === 0 && <RefreshButton onClick={refreshClick} />}
         </div>
       )}
     </div>
