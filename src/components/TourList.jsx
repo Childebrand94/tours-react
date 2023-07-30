@@ -24,10 +24,14 @@ const TourList = () => {
     getData()
   }, [])
 
+  const deleteTour = (dataId) => {
+    console.log(dataId)
+    setData((prevData) => prevData.filter((item) => item.id !== dataId))
+  }
   return (
     <div className="tours">
       {data.map(({ id, image, name, info, price }) => {
-        return <Tour key={id} image={image} name={name} info={info} price={price} />
+        return <Tour key={id} image={image} name={name} info={info} price={price} onClick={() => deleteTour(id)} />
       })}
     </div>
   )
